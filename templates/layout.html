@@ -1,0 +1,48 @@
+<!doctype html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>AlchemyAPI | Who's in the News</title>
+    <link rel="shortcut icon" href="http://www.alchemyapi.com/sites/default/files/navicon_AlchemyAPI.png"> 
+   
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='style.css') }}">
+    <script src="{{ url_for('static', filename='jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='waitForImage.js') }}"></script>
+    <script src="{{ url_for('static', filename='CollagePlus.js') }}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+</head>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+   <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand"><i><b>Who's in the News</b></i></a>
+    </div>
+    
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+       <ul class="nav navbar-nav navbar-right">
+       
+        <li><p class="navbar-text">Powered by <a href="http://alchemyapi.com/newsapi" target="_blank">AlchemyData News</a></p></li>
+        <li><a href="http://github.com/AlchemyAPI/whos-in-the-news" target="_blank"><span class="label label-warning">How does it work?</span></a></li>
+       </ul>
+      
+       
+       </div>
+  </div>
+</nav>
+
+
+
+
+
+{% block body %}{% endblock %}
+
+

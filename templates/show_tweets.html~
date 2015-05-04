@@ -1,0 +1,124 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript" charset="utf-8" id='source_code'>
+
+function dots() { window.setInterval( function() {
+    var wait = document.getElementById("wait");
+    if ( wait.innerHTML.length > 3 ) 
+        wait.innerHTML = "";
+    else 
+        wait.innerHTML += ".";
+    }, 200);
+}
+
+
+var posCount = {{ posCount }};
+var negCount = {{ negCount }};
+var neuCount = {{ neuCount }};
+var totalCount = posCount + negCount + neuCount
+var i=0;
+var j=0;
+var name='wedge1';
+
+if (totalCount > 0) {
+  var e = document.getElementById('chart');
+  e.style.display = 'block';
+  drawLoop();
+}
+
+function drawLoop() { 
+ setTimeout(function () {
+    drawWedge(j,i,totalCount,name+"shad",2);    
+    drawWedge(j,i,totalCount,name, 0);
+    i++;
+    if (i <= posCount) {
+      document.getElementById('pos').textContent="positive: " + i;
+      drawLoop();
+    }
+    else if (i <= posCount + negCount) {
+      if (i == posCount+1) {
+        name='wedge2';
+        j = i - 1;
+      }
+      document.getElementById('neg').textContent="negative: " + (i-j);
+      drawLoop();
+    }
+    else if (i <= totalCount ) {
+      if (i == posCount + negCount + 1) {
+        name='wedge3';
+        j = i - 1;
+      }
+      document.getElementById('neu').textContent="neutral: " + (i-j);
+      drawLoop();
+    }
+  }, 4)
+
+}
+
+
+function loading() {
+   var e = document.getElementById('loading');
+       e.style.display =  'inline';
+   e = document.getElementById('chart');
+       e.style.display =  'none';
+   dots();
+}
+
+function drawWedge(startSize, endSize, total, id, offset) {
+  var radius = 49;
+  var startPointX = 49 + offset;
+  var startPointY = 49 + offset;
+  var startAngle = (startSize/total)*360;
+  var endAngle = (endSize/total)*360;
+
+ 
+  if (endAngle - startAngle >= 180) {
+    var shape = "1,1"
+  }
+  else {
+    var shape = "0,1"
+  } 
+
+  var x1 = startPointX + radius * Math.cos(Math.PI * startAngle/180); 
+  var y1 = startPointY + radius * Math.sin(Math.PI * startAngle/180);     
+  var x2 = startPointX + radius * Math.cos(Math.PI * endAngle/180);
+  var y2 = startPointY + radius * Math.sin(Math.PI * endAngle/180);
+
+  var pathString = "M"+startPointX+","+startPointY+" L" + x1 + "," + y1 + " A" + radius + "," + radius + " 0 "+shape+ " " + x2 + "," + y2 + " z";
+  document.getElementById(id).setAttribute("d", pathString);
+
+   
+}
+
+</script>
+    
+  <form action="{{ url_for('add_entry') }}" method=post class=add-entry onsubmit="loading()">
+
+    <input name=text type=text placeholder="Enter search term here" size="22" autocomplete="off">
+      
+  </form>
+  
+  <h2 id="loading">Searching<span id="wait"></span></h2>
+  
+  <div id="chart">
+   <svg viewBox="0 0 100 100" id="graphics">
+    <path d="" fill="#D8D8D8" stroke="none" stroke-width="0" id="wedge1shad"/>
+    <path d="" fill="#D8D8D8" stroke="none" stroke-width="0" id="wedge2shad"/>
+    <path d="" fill="#D8D8D8" stroke="none" stroke-width="0" id="wedge3shad"/>    
+    <path d="" fill="#128fc8" stroke="none" stroke-width="0" id="wedge1"/>
+    <path d="" fill="#ffc315" stroke="none" stroke-width="0" id="wedge2"/>
+    <path d="" fill="#6e6d6d" stroke="none" stroke-width="0" id="wedge3"/>
+
+   </svg>
+  <table style="width: 100%">
+   <tr>
+     <td id="pos" style="color: #128fc8"></td>
+     <td id="neg" style="color: #ffc315"></td>
+     <td id="neu" style="color: #6e6d6d"></td>
+   </tr>
+  </table>
+  </div>
+
+
+
+{% endblock %}

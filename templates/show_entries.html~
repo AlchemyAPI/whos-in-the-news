@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% block body %}
+
+    
+    <form action="{{ url_for('add_entry') }}" method=post class=add-entry>
+   
+       Input:
+        <input name=text type=text>
+        <input type=submit value=Go!>
+      
+    </form>
+
+  <div class=entries>
+  {% if entries[0] %}
+    <code><pre>{{ entries[0].text|safe }}</pre></code>
+  {% else %}
+    <em>Unbelievable.  No entries here so far</em>
+  {% endif %}
+  </div>
+{% endblock %}
