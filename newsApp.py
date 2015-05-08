@@ -14,9 +14,7 @@ def get_image(resource, entity, article, queue):
         i_results = requests.get(url=i_get_url) 
         i_response = i_results.json()
         if i_response['results']['bindings']:
-            picture = i_response['results']['bindings'][0]['thumbnail']['value']
-        #else:
-            #picture = 'imgError(this);'    
+            picture = i_response['results']['bindings'][0]['thumbnail']['value']   
             
             queue.put('<div class="Image_Wrapper" data-caption="'+entity['disambiguated']['name']+'"><a href="'+article['source']['enriched']['url']['url']+'" target="_blank"><img src="'+ picture+'" onerror="imgError(this);"/></a></div>')
     except Exception as e:
