@@ -6,11 +6,11 @@ from flask import Flask, url_for, render_template, json
 
 app = Flask(__name__)
 
-API_KEY=<YOUR_API_KEY>
+API_KEY=YOUR_API_KEY
 
 def get_image(resource, entity, article, queue):
     try: 
-        i_get_url = 'http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=select+%3Fthumbnail+where+{+<'+resource+'>+dbpedia-owl%3Athumbnail+%3Fthumbnail}&format=json&timeout=1000' 
+        i_get_url = 'http://dbpedia.org/sparql?default-graph-uri=http%3A%2F%2Fdbpedia.org&query=select+%3Fthumbnail+where+{+<'+resource+'>+dbo%3Athumbnail+%3Fthumbnail}&format=json&timeout=1000' 
         i_results = requests.get(url=i_get_url) 
         i_response = i_results.json()
         if i_response['results']['bindings']:
