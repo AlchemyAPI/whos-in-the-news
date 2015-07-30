@@ -3,18 +3,18 @@ Who's in the News uses AlchemyData News to find notable people in news headlines
 
 Everything you need to get up and running can be found by cloning this respository:
 
-'''
-git clone https://github.com/AlchemyAPI/whos-in-the-news.git
-''
+
+    git clone https://github.com/AlchemyAPI/whos-in-the-news.git
+
 
 Once you have the files, enter your API key in newsApp.py under the API_KEY variable. 
 
 To kick things off:
 
-'''
-cd whos-in-the-news
-python newsApp.py
-'''
+
+    cd whos-in-the-news
+    python newsApp.py
+
 
 The application can be accessed locally at port 8000.
 
